@@ -1,1 +1,99 @@
-<p>login works!</p>
+<div class="login-container">
+  <mat-card>
+    <mat-icon class="avatar" color="primary">account_circle</mat-icon>
+    <mat-card-header class="card-header">
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form #loginForm="ngForm" (ngSubmit)="logIn(loginForm)" novalidate>
+        <mat-form-field class="input" appearance="fill">
+          <mat-label for="emailId">Email</mat-label>
+          <input
+            matInput
+            type="email"
+            id="emailId"
+            [(ngModel)]="user.email"
+            name="email"
+            #emailInput="ngModel"
+            required
+            email
+          />
+          <button
+            *ngIf="emailInput.value"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="user = { email: '', password: '' }"
+            type="button"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+        <mat-error *ngIf="emailInput.errors?.['required'] && emailInput.touched"
+          >Required
+        </mat-error>
+        <mat-error *ngIf="emailInput.errors?.['email']"
+          >Invalid email address</mat-error
+        >
+
+        <mat-form-field class="input" appearance="fill">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            type="password"
+            id="passwordId"
+            [(ngModel)]="user.password"
+            name="password"
+            #passwordInput="ngModel"
+            required
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$"
+          />
+          <button
+            *ngIf="passwordInput.value"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="user.password = ''"
+            type="button"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+        <div *ngIf="passwordInput.errors?.['pattern']">
+          <mat-password-strength
+            #passwordComponent
+            [password]="passwordInput.value"
+          >
+          </mat-password-strength>
+          <mat-password-strength-info [passwordComponent]="passwordComponent">
+          </mat-password-strength-info>
+        </div>
+        <mat-error
+          *ngIf="passwordInput.errors?.['required'] && passwordInput.touched"
+        >
+          Required
+        </mat-error>
+
+        <button
+          type="submit"
+          class="login-button"
+          mat-raised-button
+          color="primary"
+          [disabled]="loginForm.touched && loginForm.invalid"
+        >
+          LOGIN
+        </button>
+        <mat-progress-bar
+          mode="indeterminate"
+          *ngIf="loading"
+        ></mat-progress-bar>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div class="button-container">
+  <button mat-button color="primary" type="button">SIGN UP</button>
+  <button mat-button color="primary" type="button">FORGOT PASSWORD</button>
+</div>

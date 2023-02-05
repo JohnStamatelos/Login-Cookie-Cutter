@@ -1,0 +1,39 @@
+mat-error {
+  text-align: left;
+  margin-top: -24px;
+  font-size: 12px;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 80px;
+  text-align: center !important;
+}
+
+.card-header {
+  display: block;
+}
+
+.input {
+  display: block;
+  width: 350px;
+}
+
+.login-button {
+  width: 100%;
+}
+
+.avatar {
+  font-size: 150px;
+  display: contents;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+  margin: 20px auto;
+  text-decoration: underline;
+  cursor: pointer;
+}
